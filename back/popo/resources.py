@@ -70,16 +70,18 @@ class UserID(Resource):
                                 "password":[], 
                                 "login":[]
                                }
-                    }
+                    }, 401
         else:
             if u.check_password(password):
                 session.permanent = True
                 session['test'] = 'success'
-                return {
+                payload = {
                         "status": "success",
                         "profile":  u.json_profile(),
                         #"profile":  alkashProfile,
                        }
+                # return payload, 200, {'Set-Cookie': 'name=Nicholas'}
+                return payload, 200
             else:
                 return {
                     "status":"error",
@@ -88,4 +90,4 @@ class UserID(Resource):
                                 "password":["wrong password", ], 
                                 "login":[]
                                }
-                    }
+                    }, 401

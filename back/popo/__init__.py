@@ -41,6 +41,3 @@ api.add_resource(Users, '/api/user/registration/', endpoint='users')
 
 from popo.resources import UserID
 api.add_resource(UserID, '/api/user/login/', endpoint = 'user_id')
-
-# /user?id=123&
-

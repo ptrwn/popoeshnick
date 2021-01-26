@@ -1,4 +1,19 @@
-User profile example
+
+## API specification
+
+
+| URI | Method | Action | Return |
+| --- | --- |--- |--- |
+| /api/user/registration/ | POST <br> {'email': 'foo@bar.com', 'password':'secret'} | Register new user | 201 - created, {'id': id_of_new_user } <br> 409 - already registered|
+|/api/user/login/|POST <br> {'email': 'foo@bar.com', 'password':'secret'}|Log in existing user|200 - OK, set session cookie, {profile}<br>401 - Unauthorized, email not registered or password is wrong|
+|/api/user/logout/|GET|Logout user, unset cookie|200 - OK|
+|/api/user/profile/|GET|Send profile details|200 - OK, {profile}|
+|/api/user/recovery/|POST<br>{'email': 'foo@bar.com'}|Email password reminder|200 - OK|
+
+
+<br>
+
+## User profile example
 ```
 {
     "username": null,
@@ -9,13 +24,3 @@ User profile example
     "parties_list": []
 }
 ```
-
-
-
-| URI | Method | Action | Return |
-| --- | --- |--- |--- |
-| /users/ | POST <br> {'email': 'foo@bar.com', 'password':'secret'} | Register new user | 201 - created, {'id': id_of_new_user } <br> 409 - already exists|
-|| GET | Get list of all users | 200 - OK, {"number_of_users": 7, <br>"users_list": [{profile_1}, {     profile_2}, ...]} |
-| /api/user/\<int:id\>/ | PUT <br> {new profile data} | Update user's profile | 200 - OK, <br> {user_profile} <br> 404 - not found, {'error': 'no user found with ID \<id\>'} |
-| | GET | Get user's profile by ID | 200 - OK, <br> {user_profile} <br> 404 - not found, {'error': 'no user found with ID \<id\>'}|
-| | DELETE | Anonymize user's profile |  |
